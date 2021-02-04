@@ -47,7 +47,14 @@ class Cookie implements IdentifierInterface
     {
         $identifier = md5(uniqid(null, true));
 
-        setcookie('cart_identifier', $identifier, 0, '/');
+        $expire = 0;
+        $path = '/';
+        $samesite = 'none';
+        $domain = $_SERVER['HTTP_HOST'];
+        $secure = true;
+        $httponly = true;
+
+        setcookie('cart_identifier', $identifier, $expire, $path . '; samesite=' . $samesite, $domain, $secure, $httponly);
 
         return $identifier;
     }
